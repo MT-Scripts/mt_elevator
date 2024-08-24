@@ -1,7 +1,7 @@
 return {
     elevators = {
         {
-            label = 'Elevador SAPD MR',
+            label = 'SAPD MR Elevator',
             levels = {
                 {
                     label = '-1',
