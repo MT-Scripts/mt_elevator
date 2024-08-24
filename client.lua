@@ -30,7 +30,7 @@ CreateThread(function()
                 debug = false,
                 options = {
                     {
-                        label = "Usar elevador",
+                        label = "Use elevator",
                         icon = 'fas fa-angle-up',
                         onSelect = function()
                             SendNUIMessage({
