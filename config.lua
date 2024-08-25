@@ -1,4 +1,6 @@
 return {
+    target = 'ox_target',
+    
     elevators = {
         {
             label = 'SAPD MR Elevator',
