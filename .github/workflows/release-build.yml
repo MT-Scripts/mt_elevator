@@ -1,8 +1,8 @@
-name: Build UI on Release
+name: Build React UI on Release
 
 on:
   release:
-    types: [published]  # triggers when you publish a release
+    types: [published]
 
 jobs:
   build-ui:
@@ -15,16 +15,22 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: 18 # or whichever version suits your setup
-        cache: 'npm'
+        node-version: 18   # or 20, depending on your setup
+        cache: 'pnpm'
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: 9   # match your local pnpm version
+        run_install: false
 
     - name: Install dependencies (web UI)
-      working-directory: web         # adjust if your React app lives elsewhere
-      run: npm ci
+      working-directory: web
+      run: pnpm install --frozen-lockfile
 
     - name: Build React UI
       working-directory: web
-      run: npm run build             # ensure this command is correct for your project
+      run: pnpm run build
 
     - name: Upload build to GitHub Release
       uses: softprops/action-gh-release@v2
