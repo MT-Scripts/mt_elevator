@@ -55,7 +55,7 @@ for k, v in pairs(config) do
                     distance = 2.0,
                     name = "elevator_menu",
                     icon = "fa-solid fa-elevator",
-                    label = "Usar Elevador",
+                    label = "Use elevator",
                     onSelect = function()
                         SetNuiFocus(true, true)
                         SendNUIMessage({
