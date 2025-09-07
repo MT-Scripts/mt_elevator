@@ -1,0 +1,67 @@
+.nui-wrapper {
+  height: 100dvh;
+  width: 100dvw;
+  display: flex;
+  align-items: center;
+}
+
+.elevator-ui {
+  position: absolute;
+  right: 5%;
+  background: url('/background.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.grid-btns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 30px;
+}
+
+.vertical-btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 30px;
+}
+
+.elevator-btn {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 1;
+}
+
+.level-number {
+  position: relative;
+  z-index: 2;
+  font-size: 3rem;
+  color: #ffffff;
+  font-weight: bold;
+  text-shadow: 0 1px 4px #000;
+}

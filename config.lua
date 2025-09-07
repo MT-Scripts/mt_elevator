@@ -1,43 +1,28 @@
 return {
-    target = 'ox_target',
-    
-    elevators = {
+    {
         {
-            label = 'SAPD MR Elevator',
-            levels = {
-                {
-                    label = '-1',
-                    ped = vec4(473.4, -983.68, 26.39, 77.7),
-                    target = {
-                        coords = vec3(471.75, -982.65, 26.5),
-                        radius = 0.3,
-                    }
-                },
-                {
-                    label = '0',
-                    ped = vec4(472.99, -983.51, 30.71, 87.22),
-                    target = {
-                        coords = vec3(471.7, -982.65, 30.85),
-                        radius = 0.3,
-                    }
-                },
-                {
-                    label = '1',
-                    ped = vec4(473.01, -983.45, 35.68, 88.33),
-                    target = {
-                        coords = vec3(471.75, -982.7, 35.8),
-                        radius = 0.3,
-                    }
-                },
-                {
-                    label = '2',
-                    ped = vec4(473.38, -983.48, 43.69, 95.82),
-                    target = {
-                        coords = vec3(471.75, -982.65, 43.85),
-                        radius = 0.3,
-                    }
-                },
+            level = 1,
+            ped = vec4(-674.3380, 323.7354, 139.1227, 181.7134),
+            target = {
+                coords = vec3(-675.1, 324.1, 140.35),
+                radius = 0.2,
+            }
+        },
+        {
+            level = 0,
+            ped = vec4(-685.9841, 327.0063, 82.0840, 261.3424),
+            target = {
+                coords = vec3(-684.2, 327.8, 83.55),
+                radius = 0.2,
+            }
+        },
+        {
+            level = -1,
+            ped = vec4(-674.6760, 362.7444, 76.7749, 180.8797),
+            target = {
+                coords = vec3(-673.75, 360.9, 78.25),
+                radius = 0.2,
             }
         }
-    },
+    }
 }

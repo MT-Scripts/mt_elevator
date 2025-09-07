@@ -1,24 +1,25 @@
 fx_version 'cerulean'
-author 'Marttins | MT Scripts'
-description 'Most incredible FiveM elevator script'
-lua54 'yes'
 game 'gta5'
+lua54 'yes'
 
-shared_scripts {
-    '@ox_lib/init.lua',
-    'config.lua'
-}
-
-client_scripts {
-    'client.lua'
-}
+name 'MT Elevator'
+author 'Martttins'
+repository 'https://github.com/MT-Scripts/mt_elevator'
+version '2.0.0'
 
 ui_page 'web/build/index.html'
 
 files {
-    'locales/*',
+    'config.lua',
+    'data/elevator_sounds.dat54.rel',
+    'audiodirectory/custom_sounds.awc',
 
-	'web/build/index.html',
-	'web/build/**/*',
-    'web/assets/**/*',
+	'web/build/**/*'
 }
+
+data_file 'AUDIO_WAVEPACK'  'audiodirectory'
+data_file 'AUDIO_SOUNDDATA' 'data/elevator_sounds.dat'
+
+shared_script '@ox_lib/init.lua'
+client_script 'resource/client.lua'
+server_script 'resource/server.lua'
