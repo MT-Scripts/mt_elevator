@@ -9,32 +9,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 18.x
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@v2
-      with:
-        version: 9.15.4
-        run_install: false
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9.15.4
+          run_install: false
 
-    - name: Install dependencies (web UI)
-      working-directory: web
-      run: pnpm install
+      - name: Install dependencies (web UI)
+        working-directory: web
+        run: pnpm install --frozen-lockfile
 
-    - name: Build React UI
-      working-directory: web
-      run: pnpm run build
+      - name: Build React UI
+        working-directory: web
+        run: pnpm run build
 
-    - name: Upload build to GitHub Release
-      uses: softprops/action-gh-release@v2
-      with:
-        files: |
-          web/build/**/*
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Zip build folder
+        run: |
+          cd web
+          zip -r ../web_build.zip build
+
+      - name: Upload build to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: web_build.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
