@@ -1,0 +1,35 @@
+name: Build UI on Release
+
+on:
+  release:
+    types: [published]  # triggers when you publish a release
+
+jobs:
+  build-ui:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18 # or whichever version suits your setup
+        cache: 'npm'
+
+    - name: Install dependencies (web UI)
+      working-directory: web         # adjust if your React app lives elsewhere
+      run: npm ci
+
+    - name: Build React UI
+      working-directory: web
+      run: npm run build             # ensure this command is correct for your project
+
+    - name: Upload build to GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          web/build/**/*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
