@@ -1,8 +1,8 @@
 local config = require "config"
 
 local function loadAudioFile()
-    if not RequestScriptAudioBank('audiodirectory/custom_sounds', false) then
-        while not RequestScriptAudioBank('audiodirectory/custom_sounds', false) do
+    if not RequestScriptAudioBank('audiodirectory/elevator_sounds', false) then
+        while not RequestScriptAudioBank('audiodirectory/elevator_sounds', false) do
             Wait(0)
         end
     end
@@ -17,17 +17,51 @@ end)
 
 RegisterNUICallback('goToLevel', function(data, cb)
     local levelData
+    local currentLevelData
     for _, level in pairs(config[data.currentElevator]) do
         if level.level == data.level then
             levelData = level
-            break
+        end
+        if level.level == data.currentLevel then
+            currentLevelData = level
         end
     end
-    if not levelData then
+    
+    if not levelData or not currentLevelData then
         cb(false)
         return
     end
-    local coords = levelData.ped
+    
+    local elevatorCenter = currentLevelData.target.coords
+    local elevatorRadius = 3.0
+    local playersInElevator = {}
+    
+    local localServerId = GetPlayerServerId(PlayerId())
+    table.insert(playersInElevator, localServerId)
+    
+    local players = GetActivePlayers()
+    for _, player in pairs(players) do
+        local playerPed = GetPlayerPed(player)
+        local playerCoords = GetEntityCoords(playerPed)
+        local distance = #(vector3(playerCoords.x, playerCoords.y, playerCoords.z) - vector3(elevatorCenter.x, elevatorCenter.y, elevatorCenter.z))
+        
+        if distance <= elevatorRadius then
+            local serverId = GetPlayerServerId(player)
+            if serverId ~= localServerId then
+                table.insert(playersInElevator, serverId)
+            end
+        end
+    end
+
+    SendNUIMessage({ action = 'setVisible', data = false })
+    SetNuiFocus(false, false)
+    
+    TriggerServerEvent('mt_elevator:teleportPlayers', playersInElevator, levelData.ped)
+    
+    cb(true)
+end)
+
+RegisterNetEvent('mt_elevator:teleportPlayer', function(coords)
     DoScreenFadeOut(500)
     Wait(1000)
     SetEntityCoords(cache.ped, coords.x, coords.y, coords.z, true, false, false, false)
@@ -42,7 +76,6 @@ RegisterNUICallback('goToLevel', function(data, cb)
         end
         ReleaseSoundId(soundId)
     end
-    cb(true)
 end)
 
 for k, v in pairs(config) do
@@ -55,7 +88,7 @@ for k, v in pairs(config) do
                     distance = 2.0,
                     name = "elevator_menu",
                     icon = "fa-solid fa-elevator",
-                    label = "Use elevator",
+                    label = "Usar elevador",
                     onSelect = function()
                         SetNuiFocus(true, true)
                         SendNUIMessage({

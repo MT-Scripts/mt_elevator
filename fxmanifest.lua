@@ -11,8 +11,9 @@ ui_page 'web/build/index.html'
 
 files {
     'config.lua',
+
     'data/elevator_sounds.dat54.rel',
-    'audiodirectory/custom_sounds.awc',
+    'audiodirectory/elevator_sounds.awc',
 
 	'web/build/**/*'
 }

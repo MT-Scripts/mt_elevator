@@ -16,7 +16,7 @@
         <Item>
           <Type>format</Type>
           <Codec>ADPCM</Codec>
-          <Samples value="211968" />
+          <Samples value="210048" />
           <SampleRate value="48000" />
           <Headroom value="-200" />
           <PlayBegin value="0" />

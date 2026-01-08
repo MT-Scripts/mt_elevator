@@ -27,6 +27,7 @@ const Elevator: React.FC = () => {
     fetchNui('hideFrame');
     fetchNui('goToLevel', {
       currentElevator,
+      currentLevel,
       level
     });
   };
