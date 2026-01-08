@@ -5,7 +5,7 @@ lua54 'yes'
 name 'MT Elevator'
 author 'Martttins'
 repository 'https://github.com/MT-Scripts/mt_elevator'
-version '2.0.0'
+version '2.0.1'
 
 ui_page 'web/build/index.html'
 
@@ -23,4 +23,5 @@ data_file 'AUDIO_SOUNDDATA' 'data/elevator_sounds.dat'
 
 shared_script '@ox_lib/init.lua'
 client_script 'resource/client.lua'
+
 server_script 'resource/server.lua'
